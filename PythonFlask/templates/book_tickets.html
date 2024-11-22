@@ -1,0 +1,114 @@
+{% include "event_host_head.html" %}
+<div class="mt-100">
+     <div class="card_1 w-80  p-10  m-auto">
+        <div class="row2">
+            <div class="col w-50">
+                <div class="mt-5">
+                    <div class="card-label">Zone:</div>
+                    <div class="ml-10 card-text">{{booking['zone']}}</div>
+                </div>
+            </div>
+            <div class="col w-50">
+                <div class="mt-5">
+                    <div class="card-label">Price:</div>
+                    <div class="ml-10 card-text">$ {{booking['total_price']}}</div>
+                </div>
+            </div>
+             <div class="col w-50">
+                <div class="mt-5">
+                    <div class="card-label">Seat Numbers:</div>
+                    <div class="ml-10 card-text">
+                        {% for seat_number in booking['seat_numbers'] %}
+                            <span>{{seat_number}},</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+</div>
+<div class="m-20">
+    <form action="book_ticket_action" method="post">
+        <input type="hidden" name="booking_id" value="{{booking['_id']}}">
+        <div class="row">
+            <div class="w-40">
+                <div class="card_1 p-10">
+                    <div class="card-title p-10">Customers Details</div>
+
+                    {% for seat_number in booking['seat_numbers'] %}
+                        <div class="row mt-10">
+                            <div class="w-30">
+                                <div>
+                                    <label>Seat Number {{seat_number}} Name:</label>
+                                    <input type="text" name="name{{seat_number}}" placeholder="Enter Name:" class="form-input">
+                                </div>
+                            </div>
+                            <div class="w-30">
+                                <div>
+                                    <label>Age:</label>
+                                    <input type="number" min="0" max="100" name="age{{seat_number}}" placeholder="Enter Age:" class="form-input" >
+                                </div>
+                            </div>
+                            <div class="w-30">
+                                <div>
+                                    <label>Gender</label>
+                                    <div>
+                                        <input type="radio" name="gender{{seat_number}}" id="gender1{{seat_number}}" value="Male"> <label for="gender1{{seat_number}}">Male</label>
+                                        <input type="radio" name="gender{{seat_number}}" id="gender2{{seat_number}}" value="Female"> <label for="gender2{{seat_number}}">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="w-30">
+                <div class="card_1 p-10">
+                    <div class= "card-title p-10 ">Payment</div>
+                    <div class="mt-5 ">
+                        <label class="card-label " for="card_type">Card Type:</label>
+                        <select name="card_type" id="card_type"  class="form-input">
+                          <option value="Credit_card">Credit Card</option>
+                          <option value="Debit_card">Debit_card</option>
+                        </select>
+                    </div>
+                    <div class="mt-5 card_label">
+                        <div class="card-label">Card Number:</div>
+                        <div class="ml-10  ">
+                            <input type="number" name="card_number"  class="form-input" placeholder="Enter Your Card Number">
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="card-label">Holder Name:</div>
+                        <div class="ml-10 ">
+                            <input type="text" name="holder_name" class="form-input" placeholder="Enter Your Name On Card">
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="card-label">CVV:</div>
+                        <div class="ml-10 ">
+                            <input type="number" name="cvv_number" class="form-input" placeholder="Enter Your CVV Number">
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="card-label">Expire Date:</div>
+                        <div class="ml-10">
+                            <input type="text" name="expire_date" class="form-input" placeholder="Enter Your Expire_Date">
+                        </div>
+                    </div>
+                    <div class="row mt-10">
+                        <input type="submit" value="Pay & Book" class="nav-menu-item" >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance for our Flask app
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/PythonFlask
+ExecStart=/home/ubuntu/PythonFlask/venv/bin/gunicorn -b 0.0.0.0:8000 main:app
+Environment="PATH=/home/ubuntu/PythonFlask/venv/bin"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

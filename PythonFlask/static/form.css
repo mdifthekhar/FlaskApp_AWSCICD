@@ -1,0 +1,35 @@
+.form-input {
+    width: 100%;
+    border: 1px solid lightgray;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.form-input:focus {
+    outline: none;
+    border: 1px solid lightgray;
+}
+.form-btn {
+    width: 100%;
+    border: 1px solid lightgray;
+    font-size: 18px;
+    padding: 10px;
+}
+.form-btn:hover {
+    background-color:#5ca58b ;
+    color: white;
+}
+.fotter{
+    text-align: center;
+    color: white;
+}
+.gender{
+    display: flex;
+    gap: 10px;
+}
+.verify-btn{
+    text-decoration: none;
+    color:black;
+    font-weight: bold;
+}
+

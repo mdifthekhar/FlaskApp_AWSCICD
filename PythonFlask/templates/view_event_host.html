@@ -1,0 +1,33 @@
+{% include "admin_head.html" %}
+<div class="mt-100">
+    <table class="table w-100 p-30">
+        <tr>
+            <th>Event Host Id:</th>
+            <th>Name:</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Verify</th>
+        </tr>
+        {% for event_host in event_hosts  %}
+        <tr>
+            <td>{{event_host['_id']}}</td>
+            <td>{{event_host['name']}}</td>
+            <td>{{event_host['email']}}</td>
+            <td>{{event_host['phone']}}</td>
+            <td>{{event_host['address']}}</td>
+            <td>{{event_host['status']}}</td>
+            <td>
+                {% if event_host['status'] == 'Not verified' %}
+                
+             <div class="form-btn"><a href="verify_event_host?event_host_id={{event_host['_id']}}" class="verify-btn">Verify</a></div>   
+                
+            {% endif %}
+            </td>
+        </tr>
+        {% endfor %}   
+    </table>
+</div>
+    
+

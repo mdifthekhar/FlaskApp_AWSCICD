@@ -1,0 +1,27 @@
+{% include "main_head.html" %}
+<div class="container-main">
+    <div class="card mlrb-20 mt-100">
+        <div class="card-item w-65">
+            <img src="https://source.unsplash.com/1600x1000/?stadium" class="img">
+        </div>
+        <div class="card-item w-35 card-form">
+            <div class=" p-40">
+                <form action="/event_host_login_action" method="post">
+                    <div class="card-title p-20">Event Host</div>
+        
+                    <div class="mt-30">
+                        <label for="email" >Email:</label>
+                        <input type="email" name="email" id="email" class="form-input" placeholder="Enter Your Email" required>
+                    </div>
+                    <div class="mt-30">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" class="form-input" placeholder="Enter Your Password" required>
+                    </div>
+                    <div class="mt-40">
+                        <input type="submit" value="login" class="form-btn">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

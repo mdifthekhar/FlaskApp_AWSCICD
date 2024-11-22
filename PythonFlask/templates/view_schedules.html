@@ -1,0 +1,199 @@
+{% if session['role']== "event_host" %}
+       {% include "event_host_head.html" %}
+{% endif %}
+
+{% if session['role']== "customer" %}
+    {% include "customer_head.html" %}
+{% endif %}
+<div class="row p-10 mt-100">
+{% for schedule in schedules  %}
+    {% set team=get_team_by_team_id(schedule['team_id']) %}
+    {% set booked_seats_zone_a=get_booked_seats_by_schedule_id_and_zone(schedule['_id'], 'zone_a') %}
+    {% set booked_seats_zone_b=get_booked_seats_by_schedule_id_and_zone(schedule['_id'], 'zone_b') %}
+    {% set booked_seats_zone_c=get_booked_seats_by_schedule_id_and_zone(schedule['_id'], 'zone_c') %}
+    <div class="col w-80 card_1 p-10 mt-10">
+        <div class="row2 ">
+            <div class="col w-50">
+                <div class="mt-5">
+                    <div class="card-label">Game Title:</div>
+                    <div class="ml-10 card-text">{{team['game_title']}}</div>
+                </div>
+            </div>
+            <div class="col w-50">
+                <div class="mt-5">
+                    <div class="card-label" >Coach Name:</div>
+                    <div class="ml-10 card-text">{{team['coach_name']}}</div>
+                </div>
+            </div>
+             <div class="col w-50">
+                <div class="mt-5">
+                    <div class="card-label">From Date:</div>
+                    <div class="ml-10 card-text">{{schedule['from_date'].strftime("%d-%m-%Y %I:%M %p")}}</div>
+                </div>
+            </div>
+            <div class="col w-50">
+                <div class="mt-5">
+                    <div class="card-label">To Date:</div>
+                    <div class="ml-10 card-text">{{schedule['to_date'].strftime("%d-%m-%Y %I:%M %p")}}</div>
+                </div>
+            </div>
+            <div class="col w-50">
+                <div class="mt-5">
+                    <div class="card-label">Address:</div>
+                    <div class="ml-10 card-text">{{schedule['address']}}</div>
+                </div>
+            </div>
+        </div>
+         <fieldset class="mt-10">
+            <legend>Zone A:</legend>
+            <div class="row">
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Total Seats:</div>
+                        <div class="ml-10 card-text">{{schedule['zone_a_seats']}}</div>
+                    </div>
+                </div>
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Booked Seats:</div>
+                        <div class="ml-10 card-text">{{booked_seats_zone_a}}</div>
+                    </div>
+                </div>
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Available Seats:</div>
+                        <div class="ml-10 card-text">{{int(schedule['zone_a_seats'])-booked_seats_zone_a}}</div>
+                    </div>
+                </div>
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Zone A-price:</div>
+                        <div class="ml-10 card-text">{{schedule['zone_a_price']}}</div>
+                    </div>
+                </div>
+                 <div class="col w-20">
+                             {% if session['role'] == "customer" %}
+                                {% if datetime.datetime.now() < schedule['from_date'] %}
+                                    {% if int(schedule['zone_a_seats'])-booked_seats_zone_a>0 %}
+                                        <form action="view_layouts" method="post">
+                                            <input type="hidden" name="schedule_id" value="{{schedule['_id']}}">
+                                            <input type="hidden" name="zone" value="zone_a">
+                                            <input type="hidden" name="price" value="{{schedule['zone_a_price']}}">
+                                            <input type="hidden" name="number_of_seats" value="{{schedule['zone_a_seats']}}">
+                                            <div class="row">
+                                                <input type="submit" value="Book Ticket" class="nav-menu-item" >
+                                            </div>
+                                        </form>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        <div class="row"></div>
+                    {% if session['role'] == "event_host" %}
+                        <a href="view_bookings?schedule_id={{schedule['_id']}}&zone=zone_a" class="nav-menu-item">View Bookings</a>
+                    {% endif %}
+                </div>
+            </div>
+         </fieldset>
+         <fieldset class="mt-10">
+            <legend>Zone B:</legend>
+            <div class="row">
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Total Seats:</div>
+                        <div class="ml-10 card-text">{{schedule['zone_b_seats']}}</div>
+                    </div>
+                </div>
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Booked Seats:</div>
+                        <div class="ml-10 card-text">{{booked_seats_zone_b}}</div>
+                    </div>
+                </div>
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Available Seats:</div>
+                        <div class="ml-10 card-text">{{int(schedule['zone_b_seats'])-booked_seats_zone_b}}</div>
+                    </div>
+                </div>
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Zone B-price:</div>
+                        <div class="ml-10 card-text">{{schedule['zone_b_price']}}</div>
+                    </div>
+                </div>
+                 <div class="col w-20">
+                     {% if session['role'] == "customer" %}
+                        {% if datetime.datetime.now() < schedule['from_date'] %}
+                            {% if int(schedule['zone_b_seats'])-booked_seats_zone_b>0 %}
+                                <form action="view_layouts" method="post">
+                                    <input type="hidden" name="schedule_id" value="{{schedule['_id']}}">
+                                    <input type="hidden" name="zone" value="zone_b">
+                                    <input type="hidden" name="price" value="{{schedule['zone_b_price']}}">
+                                    <input type="hidden" name="number_of_seats" value="{{schedule['zone_b_seats']}}">
+                                    <div class="row">
+                                        <input type="submit" value="Book Ticket" class="nav-menu-item" >
+                                    </div>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if session['role'] == "event_host" %}
+                        <a href="view_bookings?schedule_id={{schedule['_id']}}&zone=zone_b" class="nav-menu-item">View Bookings</a>
+                    {% endif %}
+                </div>
+            </div>
+         </fieldset>
+         <fieldset class="mt-10">
+            <legend>Zone C:</legend>
+            <div class="row">
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Total Seats:</div>
+                        <div class="ml-10 card-text">{{schedule['zone_c_seats']}}</div>
+                    </div>
+                </div>
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Booked Seats:</div>
+                        <div class="ml-10 card-text">{{booked_seats_zone_c}}</div>
+                    </div>
+                </div>
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Available Seats:</div>
+                        <div class="ml-10 card-text">{{int(schedule['zone_c_seats'])-booked_seats_zone_c}}</div>
+                    </div>
+                </div>
+                <div class="col w-20">
+                    <div class="mt-5">
+                        <div class="card-label">Zone C-price:</div>
+                        <div class="ml-10 card-text">{{schedule['zone_c_price']}}</div>
+                    </div>
+                </div>
+                <div class="col w-20">
+                    {% if session['role'] == "customer" %}
+                        {% if datetime.datetime.now() < schedule['from_date'] %}
+                            {% if int(schedule['zone_c_seats'])-booked_seats_zone_c>0 %}
+                                <form action="view_layouts" method="post">
+                                    <input type="hidden" name="schedule_id" value="{{schedule['_id']}}">
+                                    <input type="hidden" name="zone" value="zone_c">
+                                    <input type="hidden" name="price" value="{{schedule['zone_c_price']}}">
+                                    <input type="hidden" name="number_of_seats" value="{{schedule['zone_c_seats']}}">
+                                    <div class="row">
+                                        <input type="submit" value="Book Ticket" class="nav-menu-item" >
+                                    </div>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% if session['role'] == "event_host" %}
+                     <a href="view_bookings?schedule_id={{schedule['_id']}}&zone=zone_c" class="nav-menu-item">View Bookings</a>
+                    {% endif %}
+                </div>
+            </div>
+         </fieldset>
+    </div>
+    {% endfor %}
+</div>
+
+

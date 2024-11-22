@@ -1,0 +1,52 @@
+{% include "main_head.html" %}
+<div class="container-main">
+    <div class="card mt-100">
+        <div class="card-item w-65">
+            <img src="https://source.unsplash.com/1600x1000/?stadium tickets" class="img">
+        </div>
+    
+        <div class="card-item w-35 card-form">
+            <div class=" p-40">
+                <form action="/customer_registration_action" method="post">
+                    <div class="card-title p-20">Customer Registration</div>
+
+                    <div class="mt-10">
+                        <label for="name" >Name:</label>
+                        <input type="text" name="name" id="name" class="form-input" placeholder="Enter Your Name" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="email" >Email:</label>
+                        <input type="email" name="email" id="email" class="form-input" placeholder="Enter Your Email" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="phone" >Phone:</label>
+                        <input type="number" name="phone" id="phone" class="form-input" placeholder="Enter Your Phone" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="age" >Age:</label>
+                        <input type="number" name="age" id="age" class="form-input" placeholder="Enter Your Age" required>
+                    </div>
+                    <div class="mt-10">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" class="form-input" placeholder="Enter Your Password " required>
+                    </div>
+                    <div class="gender mt-10">
+                        <div> Gender:</div>
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male">Male</label><br>
+                      <input type="radio" id="female" name="gender" value="female" >
+                        <label for="female">Female</label><br>
+                      <input type="radio" id="others" name="gender" value="others" >
+                        <label for="others">Others</label>
+                    </div>
+                        
+                    <div class="mt-10">
+                        <input type="submit" value="Register" class="form-btn">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+       
+    </div>
+</div>

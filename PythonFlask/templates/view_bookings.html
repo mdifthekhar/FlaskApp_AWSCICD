@@ -1,0 +1,117 @@
+{% if session['role']== "event_host" %}
+       {% include "event_host_head.html" %}
+{% endif %}
+
+{% if session['role']== "customer" %}
+    {% include "customer_head.html" %}
+{% endif %}
+<div class="w-100">
+    {% for booking in bookings %}
+     {% set schedule= get_schedule_by_schedule_id(booking['schedule_id']) %}
+        {% set team= get_team_by_team_id(schedule['team_id']) %}
+           {% set customer= get_customer_by_customer_id(booking['customer_id']) %}
+              {% set ticket= get_ticket_by_booking_id(booking['_id']) %}
+                 {% set payment= get_payment_by_booking_id(booking['_id']) %}
+        <div class="mt-100">
+
+        </div>
+        <div class="card_1 p-20 m-20">
+            <div class="row">
+                <div class="w-20">
+                    <div>Game Details</div>
+                    <div class="mt-5">
+                        <div class="card-label">Game Title:</div>
+                        <div class="ml-10 card-text">{{team['game_title']}}</div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="card-label">From Date:</div>
+                        <div class="ml-10 card-text">{{schedule['from_date'].strftime("%d-%m-%Y %I:%M %p")}}</div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="card-label">To Date:</div>
+                        <div class="ml-10 card-text">{{schedule['to_date'].strftime("%d-%m-%Y %I:%M %p")}}</div>
+                     </div>
+                    <div class="mt-5">
+                        <div class="card-label">Address:</div>
+                        <div class="ml-10 card-text">{{schedule['address']}}</div>
+                     </div>
+
+                </div>
+                <div class="w-20">
+                    <div>Booked By</div>
+                     <div class="mt-5">
+                        <div class="card-label">Name:</div>
+                        <div class="ml-10 card-text">{{customer['name']}}</div>
+                     </div>
+                    <div class="mt-5">
+                        <div class="card-label">Email:</div>
+                        <div class="ml-10 card-text">{{customer['email']}}</div>
+                     </div>
+                      <div class="mt-5">
+                        <div class="card-label">Phone:</div>
+                        <div class="ml-10 card-text">{{customer['phone']}}</div>
+                     </div>
+                     <div class="mt-5">
+                        <div class="card-label">Age:</div>
+                        <div class="ml-10 card-text">{{customer['age']}}</div>
+                     </div>
+                       <div class="mt-5">
+                        <div class="card-label">Gender:</div>
+                        <div class="ml-10 card-text">{{customer['gender']}}</div>
+                     </div>
+
+                </div>
+                <div class="w-20">
+                    <div>Booking Details</div>
+                    <div class="mt-5">
+                        <div class="card-label">Seat Numbers:</div>
+                        <div class="ml-10 card-text">{{booking['seat_numbers']}}</div>
+                     </div>
+                    <div class="mt-5">
+                        <div class="card-label">Zone:</div>
+                        <div class="ml-10 card-text">{{booking['zone']}}</div>
+                     </div>
+                     <div class="mt-5">
+                        <div class="card-label">Total Price:</div>
+                        <div class="ml-10 card-text">$ {{booking['total_price']}}</div>
+                     </div>
+                     <div class="mt-5">
+                        <div class="card-label">Booked Date:</div>
+                        <div class="ml-10 card-text">{{booking['date']}}</div>
+                     </div>
+                    <div class="mt-5">
+                        <div class="card-label">Status:</div>
+                        <div class="ml-10 card-text">{{booking['status']}}</div>
+                     </div>
+                </div>
+                <div class="w-20">
+                    <div>Payment Details</div>
+                    <div class="mt-5">
+                        <div class="card-label">Card Number:</div>
+                        <div class="ml-10 card-text">{{payment['card_number']}}</div>
+                     </div>
+                    <div class="mt-5">
+                        <div class="card-label">Expire Date:</div>
+                        <div class="ml-10 card-text">{{payment['expire_date']}}</div>
+                     </div>
+                     <div class="mt-5">
+                        <div class="card-label">Holder Name:</div>
+                        <div class="ml-10 card-text">{{payment['holder_name']}}</div>
+                     </div>
+                     <div class="mt-5">
+                        <div class="card-label">Amount:</div>
+                        <div class="ml-10 card-text">$ {{payment['amount']}}</div>
+                     </div>
+                    {% if session['role'] == 'customer' %}
+                    {% if booking['status'] == 'Booked' %}
+                     <div class="mt-10">
+                          <a href="cancel_bookings?booking_id={{booking['_id']}}" class="form-btn verify-btn ">Cancel Booking</a>
+                      </div>
+                    {% endif %}
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+      {% endfor %}
+</div>

@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+  - source: ./PythonFlask
+    destination: /home/ubuntu/PythonFlask
+    overwrite: true
+
+hooks:
+  # Run the before_install.sh script as root to set up the environment
+  BeforeInstall:
+    - location: ./PythonFlask/scripts/before_install.sh
+      timeout: 300
+      runas: root
+
+  # After the install, you might want to restart the service or perform other steps
+  AfterInstall:
+    - location: ./PythonFlask/scripts/after_install.sh
+      timeout: 300
+      runas: root

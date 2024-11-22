@@ -1,0 +1,51 @@
+<div class="box mt-100 w-80 p-20">
+    <div class="box-title">Add Schedule</div>
+    <form action="/add_schedule_action" method="post">
+        <input type="hidden" name="team_id" value="{{team_id}}">
+{% include "event_host_head.html" %}
+        <div class="row p-20">
+             <div class="col w-30 mt-10">
+                <label for="from_date">From Date:</label>
+                <input type="datetime-local" id="from_date" class="form-input"  name="from_date">
+            </div>
+             <div class="col w-30 mt-10">
+                <label for="to_date">To Date:</label>
+                <input type="datetime-local" id="to_date" class="form-input"  name="to_date">
+            </div>
+            <div class="col w-30 mt-10">
+                <label for="address">Address:</label>
+                <input type="text" id="address"  class="form-input" name="address" placeholder="Enter Address">
+             </div>
+            <div class="col w-30 mt-10">
+                <label for="zone_a_seats">Zone A-seats:</label>
+                <input type="text" id="zone_a_seats" class="form-input" name="zone_a_seats" placeholder="Enter Zone A Seats">
+             </div>    
+             <div class="col w-30 mt-10">
+                <label for="zone_b_seats">Zone B-seats:</label>
+                <input type="text" id="zone_b_seats" class="form-input" name="zone_b_seats" placeholder="Enter Zone B Seats">
+             </div>   
+             <div class="col w-30 mt-10">
+                <label for="zone_c_seats">Zone C-seats:</label>
+                <input type="text" id="zone_c_seats" class="form-input" name="zone_c_seats" placeholder="Enter Zone C Seats">
+            </div>
+            <div class="col w-30 mt-10">
+                <label for="zone_a_price">Zone A-price:</label>
+                <input type="number" id="zone_a_price" class="form-input" name="zone_a_price" placeholder="Enter Zone A Price">
+            </div> 
+            <div class="col w-30 mt-10">
+                <label for="zone_b_price">Zone B-price:</label>
+                <input type="number" id="zone_b_price" class="form-input"  name="zone_b_price" placeholder="Enter Zone B Price">
+            </div> 
+            <div class="col w-30 mt-10">
+                <label for="zone_c_price">Zone C-price:</label>
+                <input type="number" id="zone_c_price"  class="form-input" name="zone_c_price" placeholder="Enter Zone C Price">
+            </div>  
+            
+        </div>
+        <div class="mt-10">
+            <input type="submit" value="ADD SCHEDULE" class="form-btn">
+        </div>
+    </form>
+    
+</div>
+

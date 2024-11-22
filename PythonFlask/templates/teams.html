@@ -1,0 +1,45 @@
+{% include "event_host_head.html" %}
+<div class="row mt-100">
+    <div class="col w-30"></div>
+    <div class="col w-30 text-center g-list-title">Games List</div>
+    <div class="col w-30 text-center"> <a href="add_team" class="form-btn verify-btn">Add New Team</a> </div>
+</div>
+
+<div class="row_1 gap-10 p-10">
+     {% for team in teams %}
+    <div class="col w-25 card_1 p-10 mt-30">
+                <div class="row">
+                    <div class="col w-50">
+                        <div class="mt-5">
+                            <div class="">Game Title:</div>
+                            <div class="ml-10 label">{{team['game_title']}}</div>
+                        </div>
+                        <div class="mt-5">
+                            <div class="" >Coach Name:</div>
+                            <div class="ml-10 label">{{team['coach_name']}}</div>
+                        </div>
+                        <div class="mt-5">
+                            <div class="">Number Of Players:</div>
+                            <div class="ml-10 label">{{team['number_of_players']}}</div>
+                        </div>
+                    </div>
+                    <div class="col w-50 mt-5">
+                              <div>
+                                  <a href="/add_schedules?team_id={{team['_id']}}" class="nav-menu-item">Add Schedules</a>
+                              </div>
+                             <div class="mt-30">
+                                 <a href="/view_schedules?team_id={{team['_id']}}" class="nav-menu-item">View Schedules</a>
+                             </div>
+                    </div>
+                </div>
+
+                <div style="height:100px; overflow:auto; border-top:1px solid lightgray" class="mt-5">
+                    <ol type="1" style="list-style-position: inside; height:100vh;overflow:auto" >
+                    {% for player in team["players"] %}
+                        <li>{{player}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+    </div>
+      {% endfor%}
+</div>
