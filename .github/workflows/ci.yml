@@ -16,7 +16,7 @@ jobs:
     
     # Step 2: Log in to Amazon ECR using the GitHub Secrets
     - name: Log in to Amazon ECR
-      uses: aws-actions/amazon-ecr-login@
+      uses: aws-actions/amazon-ecr-login@v1
       with:
         region: us-east-1
     
