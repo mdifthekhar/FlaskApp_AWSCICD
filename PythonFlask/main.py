@@ -404,5 +404,5 @@ def get_booked_seats_by_schedule_id_and_zone(schedule_id, zone):
     return booked_seats
 
 
-#app.run(host="0.0.0.0", port=5000)
+app.run(host="0.0.0.0", port=5000)
 
