@@ -1,0 +1,36 @@
+name: Build and Push Docker Image to AWS ECR
+
+on:
+  push:
+    branches:
+      - ci  # Runs on any push to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout code
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    # Step 2: Log in to Amazon ECR using the GitHub Secrets
+    - name: Log in to Amazon ECR
+      uses: aws-actions/amazon-ecr-login@v1
+    
+    # Step 3: Build Docker image
+    - name: Build Docker image
+      run: |
+        docker build -t my-python-app .
+
+    # Step 4: Tag Docker image to push to ECR repository
+    - name: Tag Docker image
+      run: |
+        IMAGE_URI=337909742079.dkr.ecr.us-east-1.amazonaws.com/my-python-app:latest
+        docker tag my-python-app:latest $IMAGE_URI
+
+    # Step 5: Push Docker image to ECR
+    - name: Push Docker image to ECR
+      run: |
+        IMAGE_URI=337909742079.dkr.ecr.us-east-1.amazonaws.com/my-python-app:latest
+        docker push $IMAGE_URI
